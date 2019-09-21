@@ -1,14 +1,18 @@
-const searchAndScrape = require("./searchAndScrape");
 const chalk = require("chalk");
+const searchAndScrape = require("./searchAndScrape");
+const adFilter = require("./adFilter");
+const validateArgs = require("./args");
 
 const error = chalk.bold.red;
 const info = chalk.keyword("green");
+const { searchTerm, keywordsLookup, keywordsExcluded } = validateArgs(process.argv.slice(2));
 
-const run = async function(search_term, keywords = [], excluded_keywords = [], verbose = false) {
+(async function() {
     try {
-        console.log(info(`Performing search for "${search_term}"`));
+        console.log(info(`Performing search for "${searchTerm}"`));
 
-        const advertsFound = await searchAndScrape(search_term);
+        const advertsFound = await searchAndScrape(searchTerm);
+        const advertsFiltered = await adFilter(advertsFound, keywordsLookup, keywordsExcluded);
 
         advertsFound.forEach(function(adInfo) {
             console.log(info(`[${adInfo.metaData.id}] ${(adInfo.price && "$" + adInfo.price) || ""} ${adInfo.title}`));
@@ -17,10 +21,4 @@ const run = async function(search_term, keywords = [], excluded_keywords = [], v
         console.log(error(err));
         throw err;
     }
-};
-
-SEARCH_TERM = "apartment";
-KEYWORDS = ["deposit", "1 bedroom", "1 bed", "1 bd"];
-EXCLUDED_KEYWORDS = ["east end", "north side"];
-
-run(SEARCH_TERM, KEYWORDS, EXCLUDED_KEYWORDS);
+})();
