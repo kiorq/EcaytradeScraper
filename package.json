@@ -1,0 +1,16 @@
+{
+    "name": "ecaytrade_active_search",
+    "version": "1.0.0",
+    "description": "Searches and scrape ads from ecaytrade.com and use the information to create a more filtered result set of adverts",
+    "main": "main.js",
+    "dependencies": {
+        "chalk": "2.4.2",
+        "puppeteer": "1.20.0"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "start": "node main.js"
+    },
+    "author": "Kirk Douglas",
+    "license": "ISC"
+}
