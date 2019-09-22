@@ -1,11 +1,14 @@
 const minimist = require("minimist");
+const chalk = require("chalk");
+
+const error = chalk.bold.red;
 
 const validate = function(args) {
     const argv = minimist(args);
 
     if (!argv.term) {
         console.log(error("--term argument required"));
-        return;
+        process.exit();
     }
 
     const searchTerm = argv.term;
