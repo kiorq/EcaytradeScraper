@@ -1,6 +1,6 @@
 # Ecaytrade Scraper
 
-Scrape ecaytrade search results and filter them to give a more narrow defined result set.
+Scrape ecaytrade.com, a local Cayman Islands listing website, search results and filter them to give a more narrow defined result set.
 
 ### Requirements
 
